@@ -41,7 +41,7 @@ pub fn Entity(T: type) type
         /// update the entity on tick
         pub fn update() void
         {}
-    }
+    };
 }
 
 pub const PhysicsComponent = struct 
