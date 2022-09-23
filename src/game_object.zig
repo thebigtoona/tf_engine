@@ -4,25 +4,30 @@ const mem = std.mem;
 const rl = @import("raylib");
 
 const tex = @import("textures.zig");
+const tf_math = @import("game_math.zig");
+
 const Textures = tex.Textures;
 const Texture2D = tex.Texture2D;
+
+pub const GameObjectOpts = struct 
+{
+    position: tf_math.Vector2 = tf_math.Vector2{},
+    texture_path: [*c]const u8 = "",
+};
 
 pub const GameObject = struct 
 {
     const Self = @This();
     
-    x: i32 = 0,
-    y: i32 = 0,
+    position: tf_math.Vector2,
     texture: Texture2D,
     
-    pub fn create(x: i32, y: i32, texture_path: [*c]const u8) GameObject
+    pub fn create(opts: GameObjectOpts) GameObject
     {
-    
-        var t = Textures.load(texture_path);
+        var t = Textures.load(opts.texture_path);
         
         return .{
-            .x = x,
-            .y = y,
+            .position = opts.position,
             .texture = t, 
         };
     }

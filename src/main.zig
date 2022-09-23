@@ -20,7 +20,7 @@ pub fn main() anyerror!void {
     
     var map = Map.init();
     
-    var player: GameObject = GameObject.create(0, 0, "C:/Users/thebi/Projects/Zig/raylib-zig/2d_engine/src/assets/player.png");
+    var player: GameObject = GameObject.create(.{ .texture_path = "C:/Users/thebi/Projects/Zig/raylib-zig/2d_engine/src/assets/player.png" });
     var frame_width: i32 = player.texture.width;
     var frame_height: i32 = player.texture.height;
     var src_rect: rl.Rectangle = rl.Rectangle {.x= 0.0, .y = 0.0, .width = @intToFloat(f32, frame_width), .height = @intToFloat(f32, frame_height)};
