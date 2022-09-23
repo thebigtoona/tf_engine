@@ -40,23 +40,25 @@ pub const Map = struct
     dirt: rl.Texture2D,
     water: rl.Texture2D,
     
-    // 640 * 800 in 32 bit chunks
+    // 640 * 800 in 32 bit chunks (figure out what resolution to use for real when map serialization is handled)
     map: [20][25]i32,
     
+    // for now this just loads lvl1 hardcoded map.  in the future serialize maps and pull from serialized 
+    // data instead of this way.
     pub fn init() Map
     {
         var map = Map 
         {
-            .grass = Textures.load("C:/Users/thebi/Projects/Zig/raylib-zig/2d_engine/src/assets/grass.png"),
-            .dirt = Textures.load("C:/Users/thebi/Projects/Zig/raylib-zig/2d_engine/src/assets/dirt.png"),
-            .water = Textures.load("C:/Users/thebi/Projects/Zig/raylib-zig/2d_engine/src/assets/water.png"),      
+            .grass = Textures.load("src/assets/grass.png"),
+            .dirt = Textures.load("src/assets/dirt.png"),
+            .water = Textures.load("src/assets/water.png"),      
             .map = level1,
         };
         
         return map;
     }
     
-    
+    // these will be more important when we serialize the maps
     pub fn load() void {}
     pub fn unload() void {}
     
@@ -86,30 +88,11 @@ pub const Map = struct
                    .height = 32,
                };
                
-               // NOTE: leaving switch commented out for now because it doesn't actually work. when the switch with
-               // break is used iteration on the outer loop incrementer stops functioning. should be part of the zig 
-               // compiler bugs for windows, so leaving this like this for now. these if's work atm. 
-               // zig 0.9.0, win 11. - 9/15/22
-               if (col == 0) Textures.drawRec(self.water, rect, position, rl.WHITE);
-               if (col == 1) Textures.drawRec(self.dirt, rect, position, rl.WHITE);
-               if (col == 2) Textures.drawRec(self.grass, rect, position, rl.WHITE);
-               
-               // switch(col)
-               // {
-               //     0 => {
-               //         Textures.drawRec(self.water, rect, position, rl.WHITE);
-               //         break;
-               //     },
-               //     1 => {
-               //         Textures.drawRec(self.dirt, rect, position, rl.WHITE);
-               //         break;
-               //     },
-               //     2 => {
-               //         Textures.drawRec(self.grass, rect, position, rl.WHITE);
-               //         break;
-               //     },
-               //     else => break,
-               // }
+               //NOTE: tried using a switch here but it's broken. when using switch the x value 
+               // never changes. workaround with if branches. 
+               if (col == 0) Textures.drawRec(self.water, rect, position, rl.WHITE)
+               else if (col == 1) Textures.drawRec(self.dirt, rect, position, rl.WHITE)
+               else if (col == 2) Textures.drawRec(self.grass, rect, position, rl.WHITE);
             }
         }
     }

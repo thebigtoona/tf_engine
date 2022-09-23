@@ -1,8 +1,8 @@
 const std = @import("std");
 const rl = @import("raylib");
 
-pub const DEFAULT_SCREEN_WIDTH: i32 = 640;
-pub const DEFAULT_SCREEN_HEIGHT: i32 = 800;
+pub const DEFAULT_SCREEN_HEIGHT: i32 = 640;
+pub const DEFAULT_SCREEN_WIDTH: i32 = 800;
 
 pub const Game = struct 
 {

@@ -35,7 +35,6 @@ pub const GameObject = struct
     pub fn tex(self: *Self) Texture2D { return self.texture; }
     pub fn update(self: *Self) void { _ = self; }
     
-    
     pub fn draw(self: *Self, src_rect: rl.Rectangle, dest_rect: rl.Rectangle, origin: rl.Vector2, rotation: f32, bg_color: rl.Color) void 
     {
         rl.DrawTexturePro(self.tex(), src_rect, dest_rect, origin, rotation, bg_color);
